@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NexGen Space - Berani Beraksi dan Berkolaborasi</title>
+  
+  <!-- Google Fonts: Inter untuk tipografi modern dan bersih -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset CSS */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1f2136 100%);
+      color: #d1d1d6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Kontainer lebar konten */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Styling Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #5a5a82;
+      border-radius: 8px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 17, 30, 0.95);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid #2b2d42;
+      padding: 16px 0;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.55);
+      transition: background-color 0.3s ease;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 1.2px;
+      cursor: default;
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+    }
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      color: #bfc0c8;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #7f5af0, #f762da);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #fff;
+      outline: none;
+      background: linear-gradient(90deg, #7f5af0, #f762da);
+      box-shadow: 0 0 12px rgba(127, 90, 240, 0.6), 0 0 30px rgba(247, 98, 218, 0.4);
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    /* BAGIAN HERO */
+    #hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+      background: radial-gradient(circle at center, #222235 0%, #0a0a0f 90%);
+      position: relative;
+      overflow: hidden;
+      color: #e0d7f5;
+    }
+    #hero h1 {
+      font-size: 3.25rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #7f5af0, #f762da);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      filter: drop-shadow(0 0 6px #f762daaa);
+      transition: filter 0.3s ease;
+    }
+    #hero p {
+      font-size: 1.25rem;
+      max-width: 520px;
+      margin: 0 auto 1.5rem;
+      color: #c6c1d9;
+      user-select: none;
+      text-shadow: 0 0 8px #7f5af088;
+    }
+    #hero .btn-primary {
+      background: linear-gradient(90deg, #f762da, #7f5af0);
+      padding: 14px 36px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 36px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 0 12px rgba(247, 98, 218, 0.8);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      will-change: transform;
+    }
+    #hero .btn-primary:hover,
+    #hero .btn-primary:focus-visible {
+      box-shadow: 0 0 30px rgba(247, 98, 218, 1);
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    /* BAGIAN UMUM UNTUK SECTION */
+    section {
+      padding: 80px 24px 96px;
+      position: relative;
+      scroll-margin-top: 96px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-weight: 700;
+      font-size: 2.9rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #ddd9ff;
+      user-select: none;
+      text-shadow: 0 0 8px #7f5af066;
+    }
+
+    /* GRID ARTIKEL */
+    #articles .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+      gap: 28px;
+      user-select: none;
+    }
+    .article-card {
+      background: linear-gradient(145deg, #1f2035, #292a4f);
+      border-radius: 16px;
+      padding: 24px 28px 32px;
+      color: #cfcce3;
+      box-shadow: 0 10px 14px rgb(0 0 0 / 0.72);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition:
+        transform 0.35s cubic-bezier(0.32,0,0.67,0),
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+      will-change: transform;
+    }
+    .article-card:hover,
+    .article-card:focus-visible {
+      transform: translateY(-12px);
+      box-shadow:
+        0 24px 32px rgb(127 90 240 / 0.6),
+        0 0 12px rgb(247 98 218 / 0.5);
+      outline: none;
+      background: linear-gradient(145deg, #342758, #543378);
+      color: #fff;
+    }
+    .article-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      user-select: none;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
+      transition: transform 0.3s ease;
+    }
+    .article-card img:hover {
+      transform: scale(1.05);
+    }
+    .article-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .article-desc {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #c9c6ddcc;
+      flex-grow: 1;
+    }
+    .article-link {
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: right;
+      color: #f762da;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .article-link:hover,
+    .article-link:focus-visible {
+      color: #7f5af0;
+      outline: none;
+    }
+
+    /* BAGIAN KONSULTASI */
+    #consultation {
+      background: linear-gradient(135deg, #191a29, #1e1f32);
+      border-radius: 20px;
+      box-shadow:
+        inset 0 0 20px #7f5af099,
+        0 10px 20px #f762da44;
+      padding: 48px 32px 64px;
+      color: #ddd9ff;
+      user-select: none;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    #consultation h2 {
+      margin-bottom: 1rem;
+      font-size: 2.6rem;
+      color: #f762da;
+      filter: drop-shadow(0 0 8px #f762daaa);
+      user-select: none;
+    }
+    #consultation p {
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      color: #c9c6dddd;
+      user-select: none;
+    }
+    #consultation form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    #consultation label {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: #c9c6ddcc;
+      text-align: left;
+      margin-bottom: 4px;
+      user-select: none;
+    }
+
+    #consultation input,
+    #consultation textarea {
+      background: #2f2e4d;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      color: #ddd9ff;
+      transition: box-shadow 0.3s ease;
+      resize: vertical;
+      min-height: 44px;
+      font-family: 'Inter', sans-serif;
+      user-select: text;
+    }
+    #consultation textarea {
+      min-height: 96px;
+    }
+    #consultation input:focus,
+    #consultation textarea:focus {
+      outline: none;
+      box-shadow: 0 0 8px 2px #f762daaa;
+      background-color: #3a3980;
+    }
+    #consultation button {
+      max-width: 200px;
+      margin: 24px auto 0;
+      background: #f762da;
+      border: none;
+      border-radius: 44px;
+      padding: 14px 36px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      filter: drop-shadow(0 0 8px #f762dacc);
+      transition: box-shadow 0.25s ease, transform 0.2s ease;
+      user-select: none;
+      will-change: transform;
+    }
+    #consultation button:hover,
+    #consultation button:focus-visible {
+      box-shadow: 0 0 18px 6px #f762daff;
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    #consultation .contact-info {
+      margin-top: 24px;
+      font-size: 1rem;
+      color: #c9c6ddaa;
+      text-align: center;
+      user-select: none;
+    }
+    #consultation .contact-info a {
+      color: #7f5af0;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #consultation .contact-info a:hover,
+    #consultation .contact-info a:focus-visible {
+      color: #f762da;
+      outline: none;
+    }
+
+    /* SECTION KOMENTAR GAYA YOUTUBE */
+    #comments-section {
+      max-width: 720px;
+      margin: 40px auto 96px;
+      padding: 32px 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #191a29, #1e1f32);
+      box-shadow: 0 10px 30px #7f5af044 inset;
+      color: #d1d1d6;
+      user-select: none;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    #comments-section h3 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #f762da;
+      margin-bottom: 24px;
+      text-align: center;
+      filter: drop-shadow(0 0 8px #f762dabb);
+      user-select: none;
+    }
+    #new-comment-form {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      align-items: flex-start;
+    }
+    #new-comment-form img.avatar {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #7f5af0, #f762da);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 18px;
+      user-select: none;
+      box-shadow: 0 0 6px #f762dacc;
+    }
+    #new-comment-form textarea {
+      flex-grow: 1;
+      min-height: 64px;
+      border-radius: 12px;
+      border: none;
+      background: #342e60;
+      color: #eee;
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      box-shadow: inset 0 0 6px #7f5af044;
+      transition: box-shadow 0.3s ease;
+    }
+    #new-comment-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px 2px #f762daaa;
+      background-color: #462f8b;
+    }
+    #new-comment-form button {
+      background: #7f5af0;
+      border: none;
+      border-radius: 32px;
+      padding: 12px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 8px #7f5af0cc;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      flex-shrink: 0;
+      height: 48px;
+    }
+    #new-comment-form button:hover,
+    #new-comment-form button:focus-visible {
+      box-shadow: 0 0 18px 5px #7f5af0ff;
+      outline: none;
+      transform: scale(1.05);
+    }
+    #comments-list {
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .comment {
+      position: relative;
+      padding: 12px 16px 16px 64px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: #2f2e4d;
+      box-shadow: 0 4px 12px #0009;
+      transition: background-color 0.3s ease;
+    }
+    .comment:hover {
+      background-color: #403f6d;
+    }
+    .comment .avatar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #7f5af0, #f762da);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 14px;
+      user-select: none;
+      box-shadow: 0 0 4px #f762daaa;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .comment .content {
+      margin-left: 8px;
+    }
+    .comment .author {
+      font-weight: 700;
+      color: #f762da;
+      user-select: text;
+      display: inline-block;
+    }
+    .comment .timestamp {
+      color: #a095c7bb;
+      font-size: 0.75rem;
+      margin-left: 8px;
+      user-select: text;
+      display: inline-block;
+    }
+    .comment .text {
+      margin: 6px 0 0 0;
+      color: #ddd9ff;
+      white-space: pre-wrap;
+      user-select: text;
+    }
+    .comment-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 16px;
+      font-size: 0.875rem;
+      color: #a095c7cc;
+      user-select: none;
+    }
+    .comment-actions button {
+      background: none;
+      border: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+      outline-offset: 2px;
+    }
+    .comment-actions button:hover,
+    .comment-actions button:focus-visible {
+      color: #f762da;
+      outline: none;
+    }
+    .comment-actions button svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      user-select: none;
+    }
+    .reply-form {
+      margin-top: 12px;
+      margin-left: 64px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .reply-form.active {
+      display: flex;
+    }
+    .reply-form textarea {
+      background: #3d3a6c;
+      border-radius: 12px;
+      border: none;
+      color: #eee;
+      padding: 10px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 64px;
+      box-shadow: inset 0 0 6px #7f5af044;
+      transition: box-shadow 0.3s ease;
+    }
+    .reply-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px 2px #f762daaa;
+      background-color: #462f8b;
+    }
+    .reply-form button {
+      background: #7f5af0;
+      border: none;
+      border-radius: 28px;
+      padding: 8px 22px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 8px #7f5af0cc;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      align-self: flex-end;
+    }
+    .reply-form button:hover,
+    .reply-form button:focus-visible {
+      box-shadow: 0 0 18px 5px #7f5af0ff;
+      outline: none;
+      transform: scale(1.05);
+    }
+    .replies {
+      margin-left: 64px;
+      border-left: 2px solid #7f5af033;
+      padding-left: 18px;
+      margin-top: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 0;
+      background: #0f0e1c;
+      text-align: center;
+      color: #666791;
+      font-size: 0.9rem;
+      user-select: none;
+      box-shadow: inset 0 1px 0 #2a267f66;
+    }
+    footer a {
+      color: #8b80f9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+    footer a:hover,
+    footer a:focus-visible {
+      color: #f762da;
+      outline: none;
+    }
+
+    /* Responsif: Mobile First */
+    @media (max-width: 640px) {
+      header .container {
+        flex-direction: column;
+        gap: 12px;
+      }
+      nav {
+        gap: 16px;
+      }
+      #hero h1 {
+        font-size: 2.5rem;
+      }
+      #articles .grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        padding: 64px 16px 72px;
+      }
+      #consultation {
+        padding: 40px 24px 56px;
+      }
+      #comments-section {
+        max-width: 100%;
+        margin: 40px 12px 80px;
+      }
+      .replies {
+        margin-left: 40px;
+        padding-left: 12px;
+      }
+      .comment, .reply-form {
+        padding-left: 56px;
+      }
+      .comment .avatar, #new-comment-form img.avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 13px;
+        left: 10px;
+        top: 10px;
+      }
+      .comment-actions {
+        font-size: 0.75rem;
+        gap: 10px;
+      }
+      #new-comment-form button, .reply-form button {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" role="banner">
+      <div class="logo" aria-label="Logo situs">NexGen Space</div>
+      <nav role="navigation" aria-label="Navigasi utama">
+        <a href="#hero" tabindex="0">Beranda</a>
+        <a href="#articles" tabindex="0">Artikel</a>
+        <a href="#consultation" tabindex="0">Konsultasi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" aria-label="Bagian hero dengan fokus pada kolaborasi dan aksi">
+      <div>
+        <h1>Memberdayakan Remaja untuk Beraksi dan Berkolaborasi</h1>
+        <p>Platform terbaik untuk solusi inovatif dan perubahan bermakna.</p>
+        <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})" aria-label="Jelajahi artikel">Jelajahi Artikel</button>
+      </div>
+    </section>
+
+    <section id="articles" aria-label="Artikel terkini yang informatif">
+      <h2>Artikel Terbaru</h2>
+      <div class="grid" role="list">
+        <article class="article-card" role="listitem" tabindex="0" aria-label="Artikel: Menjadi Remaja Sehat">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4f9eedb6-05c9-4ab3-9f29-7f6ded5826b8.png" alt="Ilustrasi remaja yang bahagia berolahraga di luar ruangan" loading="lazy" />
+          <h3 class="article-title">Menjadi Remaja Sehat</h3>
+          <p class="article-desc">Remaja sehat bukan hanya fisik bugar, tapi juga mental kuat dan gaya hidup positif.</p>
+          <a class="article-link" href="#" aria-label="Baca lebih lanjut tentang Menjadi Remaja Sehat">Baca Selengkapnya →</a>
+        </article>
+        <article class="article-card" role="listitem" tabindex="0" aria-label="Artikel: Apa Itu GenRe?">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b1dc22ee-3f3e-4231-9167-9c20a939b9a2.png" alt="Grafis menunjukkan remaja terlibat kegiatan kelompok dengan teks Program GenRe" loading="lazy" />
+          <h3 class="article-title">Apa Itu GenRe?</h3>
+          <p class="article-desc">GenRe adalah program untuk mempersiapkan remaja hadapi masa depan dengan perencanaan matang.</p>
+          <a class="article-link" href="#" aria-label="Baca lebih lanjut tentang Apa Itu GenRe?">Baca Selengkapnya →</a>
+        </article>
+        <article class="article-card" role="listitem" tabindex="0" aria-label="Artikel: Tips Mengatur Waktu">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0ef58ab3-712c-47ca-a01b-4168e76aaff0.png" alt="Ilustrasi kalender dan jam untuk manajemen waktu" loading="lazy" />
+          <h3 class="article-title">Tips Mengatur Waktu</h3>
+          <p class="article-desc">Pelajari strategi efektif mengelola waktu agar tetap produktif tanpa stres.</p>
+          <a class="article-link" href="#" aria-label="Baca lebih lanjut tentang Tips Mengatur Waktu">Baca Selengkapnya →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="consultation" aria-label="Formulir permintaan konsultasi dan kontak">
+      <h2>Konsultasi</h2>
+      <p>Hubungi kami untuk solusi terbaik atas masalah Anda.</p>
+      <form
+        action="https://formspree.io/f/xrbkzjky"
+        method="POST"
+        aria-describedby="consultation-description"
+        aria-live="polite"
+      >
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" required aria-required="true" />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required aria-required="true" />
+
+        <label for="message">Pesan:</label>
+        <textarea id="message" name="message" required aria-required="true"></textarea>
+
+        <button type="submit" aria-label="Kirim pesan konsultasi">Kirim</button>
+      </form>
+      <p class="contact-info" id="consultation-description" role="region" aria-live="polite">
+        Atau hubungi via WhatsApp: <a href="https://wa.me/6282325382479" target="_blank" rel="noopener" aria-label="Nomor WhatsApp 0823 2538 2479">0823-2538-2479</a>
+      </p>
+    </section>
+
+    <!-- Bagian Komentar Gaya YouTube -->
+    <section id="comments-section" aria-label="Kolom diskusi dan komentar">
+      <h3>Diskusi</h3>
+      <form id="new-comment-form" aria-label="Form tambah komentar baru" onsubmit="addNewComment(event)">
+        <div class="avatar" aria-hidden="true">U</div>
+        <textarea id="new-comment-text" placeholder="Tulis komentar..." aria-label="Tulis komentar baru di sini" required></textarea>
+        <button type="submit" aria-label="Kirim komentar baru">Kirim</button>
+      </form>
+      <div id="comments-list" tabindex="0" aria-live="polite" aria-relevant="additions" role="list">
+        <!-- komentar akan dimunculkan di sini -->
+        <p id="comments-empty" style="text-align:center; color:#7f5af0;">Belum ada komentar. Jadilah yang pertama berdiskusi!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 NexGen Space — Semua Hak Dilindungi.</p>
+    <p><a href="https://nyctowl.vercel.app/" target="_blank" rel="noopener">Terinspirasi oleh Desain Nyctowl</a></p>
+  </footer>
+
+  <script>
+  // Utility: Sanitize string to prevent HTML injection
+  function sanitizeHTML(str){
+    let temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+  }
+  // Format relative timestamp
+  function timeAgo(date){
+    const seconds = Math.floor((new Date() - date) / 1000);
+    if(seconds < 60) return `${seconds} detik lalu`;
+    if(seconds < 3600) return `${Math.floor(seconds/60)} menit lalu`;
+    if(seconds < 86400) return `${Math.floor(seconds/3600)} jam lalu`;
+    if(seconds < 2592000) return `${Math.floor(seconds/86400)} hari lalu`;
+    return date.toLocaleDateString('id-ID');
+  }
+
+  // User avatar letter from name or "U"
+  function avatarLetter(name){
+    if(!name) return 'U';
+    return name.trim().charAt(0).toUpperCase();
+  }
+
+  // Create comment element recursively
+  function createCommentElement(comment){
+    const commentEl = document.createElement('div');
+    commentEl.classList.add('comment');
+    commentEl.tabIndex = 0;
+    commentEl.setAttribute('role','listitem');
+    commentEl.dataset.id = comment.id;
+
+    // Avatar
+    const avatar = document.createElement('div');
+    avatar.classList.add('avatar');
+    avatar.textContent = avatarLetter(comment.name);
+    avatar.setAttribute('aria-hidden', 'true');
+
+    // Content container
+    const content = document.createElement('div');
+    content.classList.add('content');
+
+    // Author and timestamp
+    const header = document.createElement('div');
+    const author = document.createElement('span');
+    author.classList.add('author');
+    author.textContent = comment.name;
+
+    const timestamp = document.createElement('span');
+    timestamp.classList.add('timestamp');
+    timestamp.textContent = timeAgo(new Date(comment.date));
+
+    header.appendChild(author);
+    header.appendChild(timestamp);
+
+    // Text content
+    const text = document.createElement('p');
+    text.classList.add('text');
+    text.innerHTML = sanitizeHTML(comment.text);
+
+    // Actions container
+    const actions = document.createElement('div');
+    actions.classList.add('comment-actions');
+
+    // Like button
+    const likeBtn = document.createElement('button');
+    likeBtn.type = 'button';
+    likeBtn.setAttribute('aria-label', `Sukai komentar oleh ${comment.name} (${comment.likes} suka)`);
+    likeBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M1 21h4V9H1v12zM23 10c0-1.11-.89-2-2-2h-6.31l.95-4.57.03-.32a1 1 0 0 0-1-1H10v12h7c.83 0 1.54-.5 1.84-1.22l3.02-7.34c.07-.23.11-.47.11-.72z"></path>
+      </svg>
+      <span>${comment.likes}</span>`;
+    likeBtn.dataset.action = "like";
+
+    // Dislike button
+    const dislikeBtn = document.createElement('button');
+    dislikeBtn.type = 'button';
+    dislikeBtn.setAttribute('aria-label', `Tidak suka komentar oleh ${comment.name} (${comment.dislikes} tidak suka)`);
+    dislikeBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="transform: rotate(180deg);">
+        <path d="M1 21h4V9H1v12zM23 10c0-1.11-.89-2-2-2h-6.31l.95-4.57.03-.32a1 1 0 0 0-1-1H10v12h7c.83 0 1.54-.5 1.84-1.22l3.02-7.34c.07-.23.11-.47.11-.72z"></path>
+      </svg>
+      <span>${comment.dislikes}</span>`;
+    dislikeBtn.dataset.action = "dislike";
+
+    // Reply toggle button
+    const replyBtn = document.createElement('button');
+    replyBtn.type = 'button';
+    replyBtn.textContent = 'Balas';
+    replyBtn.dataset.action = "reply";
+    replyBtn.setAttribute('aria-label', `Balas komentar oleh ${comment.name}`);
+
+    actions.appendChild(likeBtn);
+    actions.appendChild(dislikeBtn);
+    actions.appendChild(replyBtn);
+
+    // Reply form (hidden by default)
+    const replyForm = document.createElement('form');
+    replyForm.classList.add('reply-form');
+    replyForm.innerHTML = `
+      <textarea aria-label="Tulis balasan komentar" required placeholder="Tulis balasan..."></textarea>
+      <button type="submit">Kirim</button>
+    `;
+
+    content.appendChild(header);
+    content.appendChild(text);
+    content.appendChild(actions);
+    content.appendChild(replyForm);
+
+    commentEl.appendChild(avatar);
+    commentEl.appendChild(content);
+
+    // Replies container
+    const repliesContainer = document.createElement('div');
+    repliesContainer.classList.add('replies');
+    commentEl.appendChild(repliesContainer);
+
+    // Render any replies recursively
+    if(comment.replies && comment.replies.length){
+      comment.replies.forEach(reply => {
+        const replyEl = createCommentElement(reply);
+        repliesContainer.appendChild(replyEl);
+      });
+    }
+
+    return commentEl;
+  }
+
+  // In-memory comment storage (simulate backend)
+  let commentsData = [];
+
+  const commentsListEl = document.getElementById('comments-list');
+  const commentsEmptyEl = document.getElementById('comments-empty');
+
+  function renderComments(){
+    commentsListEl.innerHTML = '';
+    if(commentsData.length === 0){
+      commentsListEl.appendChild(commentsEmptyEl);
+      return;
+    }
+    commentsData.forEach(c=>{
+      const cEl = createCommentElement(c);
+      commentsListEl.appendChild(cEl);
+    });
+  }
+
+  // Add new top-level comment
+  function addNewComment(event){
+    event.preventDefault();
+    const textarea = document.getElementById('new-comment-text');
+    const text = textarea.value.trim();
+    if(!text){
+      alert('Mohon isi komentar Anda');
+      return;
+    }
+    const newComment = {
+      id: Date.now().toString(),
+      name: 'Pengguna',  // in real app would get from user account
+      text,
+      date: new Date().toISOString(),
+      likes: 0,
+      dislikes: 0,
+      replies: []
+    };
+    commentsData.unshift(newComment);
+    textarea.value = '';
+    renderComments();
+  }
+
+  // Find comment by id recursively
+  function findCommentById(id, comments=commentsData){
+    for(const comment of comments){
+      if(comment.id === id) return comment;
+      if(comment.replies && comment.replies.length){
+        const found = findCommentById(id, comment.replies);
+        if(found) return found;
+      }
+    }
+    return null;
+  }
+
+  // Handle like, dislike, reply clicks and submit reply
+  commentsListEl.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    const action = btn.dataset.action;
+    if(!action) return;
+
+    // Find comment container
+    const commentEl = btn.closest('.comment');
+    if(!commentEl) return;
+    const commentId = commentEl.dataset.id;
+    const comment = findCommentById(commentId);
+    if(!comment) return;
+
+    if(action === 'like'){
+      comment.likes++;
+      renderComments();
+    } else if(action === 'dislike'){
+      comment.dislikes++;
+      renderComments();
+    } else if(action === 'reply'){
+      // Toggle reply form
+      const form = commentEl.querySelector('.reply-form');
+      // Close any other active forms
+      document.querySelectorAll('.reply-form.active').forEach(f=>{
+        if(f !== form) f.classList.remove('active');
+      });
+      form.classList.toggle('active');
+      if(form.classList.contains('active')){
+        form.querySelector('textarea').focus();
+      }
+    }
+  });
+
+  // Handle submit reply on dynamically generated forms
+  commentsListEl.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target.closest('.reply-form');
+    if(!form) return;
+
+    const textarea = form.querySelector('textarea');
+    const text = textarea.value.trim();
+
+    if(!text){
+      alert('Mohon isi balasan anda');
+      return;
+    }
+
+    // Find parent comment container
+    const commentEl = form.closest('.comment');
+    if(!commentEl) return;
+    const commentId = commentEl.dataset.id;
+    const parentComment = findCommentById(commentId);
+    if(!parentComment) return;
+
+    // Add reply
+    const reply = {
+      id: Date.now().toString(),
+      name: 'Pengguna', // For demo static, ideally real user name
+      text,
+      date: new Date().toISOString(),
+      likes: 0,
+      dislikes: 0,
+      replies: []
+    };
+    parentComment.replies.push(reply);
+
+    // Close form and clear textarea
+    form.classList.remove('active');
+    textarea.value = '';
+
+    renderComments();
+  });
+
+  // On DOM loaded render existing comments if any
+  document.addEventListener('DOMContentLoaded', () => {
+    renderComments();
+  });
+
+  // Animasi scroll artikel terinspirasi nyctowl
+  document.addEventListener('DOMContentLoaded', () => {
+    const articles = document.querySelectorAll('.article-card');
+    articles.forEach(card => {
+      card.style.transform = 'translateY(30px)';
+      card.style.opacity = '0';
+    });
+
+    let observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    articles.forEach(card => observer.observe(card));
+  });
+  </script>
+</body>
+</html>
+
